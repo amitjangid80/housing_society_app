@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "800138351157",
+    "project_id": "housingsociety-1057d",
+    "storage_bucket": "housingsociety-1057d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:800138351157:android:596d1af8a8ec207eca977c",
+        "android_client_info": {
+          "package_name": "com.amit.housing_society_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "800138351157-imj5upsc73l88q02e2uv9nvsgtbrnn6q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHDVHhiKWMroz4l2BXmgsjGcMsQV2yb1s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "800138351157-imj5upsc73l88q02e2uv9nvsgtbrnn6q.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "800138351157-uu37re0etd36ak57tbmmploour1g4fns.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.amit.housingSocietyApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

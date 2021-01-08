@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>800138351157-uu37re0etd36ak57tbmmploour1g4fns.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.800138351157-uu37re0etd36ak57tbmmploour1g4fns</string>
+	<key>API_KEY</key>
+	<string>AIzaSyC0ET19hNTR1WtMejGR1o428Ytg90H4UXk</string>
+	<key>GCM_SENDER_ID</key>
+	<string>800138351157</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.amit.housingSocietyApp</string>
+	<key>PROJECT_ID</key>
+	<string>housingsociety-1057d</string>
+	<key>STORAGE_BUCKET</key>
+	<string>housingsociety-1057d.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:800138351157:ios:99c2ca0f90156751ca977c</string>
+</dict>
+</plist>

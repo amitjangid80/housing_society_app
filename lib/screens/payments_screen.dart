@@ -2,26 +2,50 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:housing_society_app/blocs/blocs.dart';
 import 'package:housing_society_app/firebase/payments_methods.dart';
 import 'package:housing_society_app/models/payments.dart';
 import 'package:housing_society_app/utils/constants.dart';
 import 'package:housing_society_app/widgets/custom_app_bar.dart';
-import 'package:housing_society_app/widgets/raised_button.dart';
+import 'package:housing_society_app/widgets/custom_button.dart';
 import 'package:multiutillib/multiutillib.dart';
-import 'package:provider/provider.dart';
 
-class PaymentsScreen extends StatelessWidget {
+class PaymentsScreen extends StatefulWidget {
+  final String uId;
+
+  PaymentsScreen({@required this.uId});
+
+  @override
+  _PaymentsScreenState createState() => _PaymentsScreenState();
+}
+
+class _PaymentsScreenState extends State<PaymentsScreen> with SingleTickerProviderStateMixin {
+  Stream _paymentsStream;
+  AnimationController _animationController;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _animationController = AnimationController(vsync: this, duration: const Duration(seconds: 1));
+
+    // calling get payment details method
+    _getPaymentDetails();
+  }
+
+  _getPaymentDetails() async {
+    await Future.delayed(const Duration(seconds: 1));
+
+    setState(() => _paymentsStream = PaymentsMethod.getPaymentDetails(userId: widget.uId));
+  }
+
   @override
   Widget build(BuildContext context) {
-    final UsersBloc _usersBloc = Provider.of<UsersBloc>(context);
-
     return Scaffold(
       appBar: CustomAppBar(title: kPayments),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: StreamBuilder<QuerySnapshot>(
-          stream: PaymentsMethod.getPaymentDetails(userId: _usersBloc.users.uid),
+          stream: _paymentsStream,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               var _docList = snapshot.data.docs;
@@ -34,9 +58,16 @@ class PaymentsScreen extends StatelessWidget {
                 itemCount: _docList.length,
                 padding: const EdgeInsets.all(0),
                 itemBuilder: (context, _position) {
+                  int _itemCount = _docList.length > 15 ? 15 : _docList.length;
                   Payments _payments = Payments.fromJson(_docList[_position].data());
 
-                  return _ItemPayment(payments: _payments);
+                  return SlideAnimation(
+                    position: _position,
+                    itemCount: _itemCount,
+                    child: _ItemPayment(payments: _payments),
+                    slideDirection: SlideDirection.fromRight,
+                    animationController: _animationController,
+                  );
                 },
               );
             }
@@ -46,6 +77,13 @@ class PaymentsScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+
+    super.dispose();
   }
 }
 
@@ -59,11 +97,10 @@ class _ItemPayment extends StatelessWidget {
     return MaterialCard(
       child: Row(
         mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Expanded(
-            flex: 2,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.start,
@@ -72,15 +109,15 @@ class _ItemPayment extends StatelessWidget {
                 RichTextWidget(
                   isDescNewLine: true,
                   caption: payments.description,
+                  descriptionStyle: Theme.of(context).textTheme.bodyText1,
                   description: '$kRupeeSymbol ${payments.amount.toString()}',
-                  descriptionStyle: Theme.of(context).textTheme.headline6.copyWith(fontWeight: FontWeight.normal),
                 ),
                 const SizedBox(height: 10),
                 RichTextWidget(
                   isDescNewLine: true,
                   caption: kBillMonth,
                   description: '${payments.billMonth}',
-                  descriptionStyle: Theme.of(context).textTheme.headline6.copyWith(fontWeight: FontWeight.normal),
+                  descriptionStyle: Theme.of(context).textTheme.bodyText1,
                 ),
               ],
             ),
@@ -90,13 +127,13 @@ class _ItemPayment extends StatelessWidget {
                 ? RichTextWidget(
                     caption: kPaidOn,
                     isDescNewLine: true,
-                    descriptionStyle: Theme.of(context).textTheme.headline6,
+                    descriptionStyle: Theme.of(context).textTheme.bodyText1,
                     description: formatDateTime(
                       payments.paidOn.toDate().toString(),
                       newDateTimeFormat: kFullDateDisplayFormat,
                     ),
                   )
-                : CustomButton(text: kPayNow, onPressed: () {}),
+                : CustomButton(text: kPayNow, onPressed: () {}, margin: const EdgeInsets.all(0)),
           ),
         ],
       ),

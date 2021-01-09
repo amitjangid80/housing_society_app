@@ -24,7 +24,6 @@ class _DashboardScreenState extends State<DashboardScreen> with SingleTickerProv
     super.initState();
 
     _animationController = AnimationController(vsync: this, duration: const Duration(milliseconds: 1500));
-    _animationController.forward();
   }
 
   @override
@@ -32,7 +31,11 @@ class _DashboardScreenState extends State<DashboardScreen> with SingleTickerProv
     final UsersBloc _usersBloc = Provider.of<UsersBloc>(context);
 
     // calling get current user details method
-    _asyncMemoizer.runOnce(() => _usersBloc.getCurrentUserDetails());
+    _asyncMemoizer.runOnce(() async {
+      await _usersBloc.getCurrentUserDetails();
+
+      _animationController.forward();
+    });
 
     return WillPopScope(
       onWillPop: onWillPop,
@@ -71,13 +74,13 @@ class _DashboardScreenState extends State<DashboardScreen> with SingleTickerProv
                         title: kVisitors,
                         icon: kIconVisitors,
                         animationController: _animationController,
-                        openBuilder: (context, VoidCallback openContainer) => VisitorsScreen(),
+                        openBuilder: (context, VoidCallback openContainer) => VisitorsScreen(uId: _usersBloc.users.uid),
                       ),
                       _GridViewItem(
                         title: kPayments,
                         icon: kIconPayments,
                         animationController: _animationController,
-                        openBuilder: (context, VoidCallback openContainer) => PaymentsScreen(),
+                        openBuilder: (context, VoidCallback openContainer) => PaymentsScreen(uId: _usersBloc.users.uid),
                       ),
                     ],
                   ),

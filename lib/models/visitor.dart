@@ -21,4 +21,13 @@ class Visitor {
         visitorPhoto: _visitorJson[kFieldVisitorPhoto],
         visitingDate: _visitorJson[kFieldVisitingDate],
       );
+
+  Map<String, dynamic> toMap() => {
+        kFieldApproved: approved,
+        kFieldVisitorName: visitorName,
+        kFieldVisitorType: visitorType,
+        kFieldDailyVisitor: dailyVisitor,
+        kFieldVisitorPhoto: visitorPhoto,
+        kFieldVisitingDate: visitingDate,
+      };
 }

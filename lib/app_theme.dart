@@ -15,8 +15,9 @@ ThemeData themeData() {
     primaryColorDark: kPrimaryDarkColor,
     primaryColorLight: kPrimaryLightColor,
     scaffoldBackgroundColor: Colors.grey[200],
+    inputDecorationTheme: inputDecorationTheme(),
     visualDensity: VisualDensity.adaptivePlatformDensity,
-    textTheme: TextTheme(button: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold)),
+    textTheme: TextTheme(button: TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold)),
     pageTransitionsTheme: PageTransitionsTheme(
       builders: <TargetPlatform, PageTransitionsBuilder>{TargetPlatform.iOS: CupertinoPageTransitionsBuilder()},
     ),
@@ -29,5 +30,21 @@ ButtonThemeData _buttonTheme() {
     buttonColor: kPrimaryColor,
     splashColor: Colors.white54,
     textTheme: ButtonTextTheme.primary,
+  );
+}
+
+InputDecorationTheme inputDecorationTheme() {
+  OutlineInputBorder _outlineInputBorder = OutlineInputBorder(
+    gapPadding: 5,
+    borderRadius: BorderRadius.circular(10),
+    borderSide: BorderSide(color: kPrimaryColor),
+  );
+
+  return InputDecorationTheme(
+    focusColor: kPrimaryColor,
+    border: _outlineInputBorder,
+    enabledBorder: _outlineInputBorder,
+    focusedBorder: _outlineInputBorder,
+    contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
   );
 }

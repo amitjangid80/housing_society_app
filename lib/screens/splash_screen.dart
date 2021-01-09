@@ -8,6 +8,7 @@ import 'package:housing_society_app/app_theme.dart';
 import 'package:housing_society_app/firebase/auth_methods.dart';
 import 'package:housing_society_app/routes/routes.dart';
 import 'package:housing_society_app/utils/constants.dart';
+import 'package:multiutillib/animations/fade_animation.dart';
 import 'package:package_info/package_info.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -44,13 +45,15 @@ class _SplashScreenState extends State<SplashScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Image(image: AssetImage(kIconHome), color: kPrimaryColor, width: _width * 0.20),
-                Container(
-                  margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                  child: Text(
-                    kAppName,
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.headline5.copyWith(color: kPrimaryColor),
+                FadeAnimation(
+                  delay: 1,
+                  child: Image(image: AssetImage(kIconHome), color: kPrimaryColor, width: _width * 0.20),
+                ),
+                FadeAnimation(
+                  delay: 1.2,
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                    child: Text(kAppName, textAlign: TextAlign.center, style: Theme.of(context).textTheme.headline5),
                   ),
                 ),
               ],
@@ -60,14 +63,17 @@ class _SplashScreenState extends State<SplashScreen> {
             left: 0,
             right: 0,
             bottom: 0,
-            child: SafeArea(
-              child: Container(
-                alignment: Alignment.center,
-                padding: const EdgeInsets.all(20),
-                child: Text(
-                  '$kVersion: $_appVersion',
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.headline6.copyWith(color: kPrimaryColor),
+            child: FadeAnimation(
+              delay: 1.4,
+              child: SafeArea(
+                child: Container(
+                  alignment: Alignment.center,
+                  padding: const EdgeInsets.all(20),
+                  child: Text(
+                    '$kVersion: $_appVersion',
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodyText2,
+                  ),
                 ),
               ),
             ),

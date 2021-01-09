@@ -31,6 +31,7 @@ dependencies:
 
   path: any
   sqflite: any
+  shimmer: any
   provider: any
   animations: any
   package_info: any
@@ -40,6 +41,7 @@ dependencies:
   google_sign_in: any
   cloud_firestore: any
   permission_handler: any
+  shared_preferences: any
   cached_network_image: any
   connectivity_wrapper: any
   font_awesome_flutter: any

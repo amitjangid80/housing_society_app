@@ -33,7 +33,7 @@ class DbProvider {
   }
 
   String _facilityTableCreateQuery = "CREATE TABLE IF NOT EXISTS $kTableFacility "
-      "($kColumnCode INTEGER AUTOINCREMENT, "
+      "($kColumnCode INTEGER, "
       "$kColumnFacilityName TEXT, "
       "$kColumnFacilityImage TEXT, "
       "$kColumnFacilityCharges REAL, "

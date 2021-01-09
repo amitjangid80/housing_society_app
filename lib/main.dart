@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:housing_society_app/app_theme.dart';
 import 'package:connectivity_wrapper/connectivity_wrapper.dart';
@@ -38,4 +37,21 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
+}
+
+handleException({
+  @required exception,
+  @required stackTrace,
+  @required String exceptionClass,
+  @required String exceptionMsg,
+}) {
+  debugPrint('\n');
+  debugPrint("========================================START OF EXCEPTION========================================");
+  debugPrint("==================================================================================================");
+  debugPrint('\n');
+  debugPrint('$exceptionClass - $exceptionMsg: \n${exception.toString()}\n$stackTrace');
+  debugPrint('\n');
+  debugPrint("==================================================================================================");
+  debugPrint("=========================================END OF EXCEPTION=========================================");
+  debugPrint('\n');
 }

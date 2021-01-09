@@ -16,18 +16,6 @@ class CustomRouter {
       case dashboardRoute:
         return MaterialPageRoute(builder: (_) => DashboardScreen());
 
-      case visitorsRoute:
-        return MaterialPageRoute(builder: (_) => VisitorsScreen());
-
-      case addVisitorRoute:
-        return MaterialPageRoute(builder: (_) => AddVisitorScreen());
-
-      case paymentsRoute:
-        return MaterialPageRoute(builder: (_) => PaymentsScreen());
-
-      case facilitiesRoute:
-        return MaterialPageRoute(builder: (_) => FacilitiesScreen());
-
       default:
         return MaterialPageRoute(builder: (_) => SplashScreen());
     }

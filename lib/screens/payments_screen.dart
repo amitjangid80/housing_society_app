@@ -95,6 +95,7 @@ class _ItemPayment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialCard(
+      borderRadius: 15,
       child: Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.center,

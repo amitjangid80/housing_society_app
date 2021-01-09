@@ -6,8 +6,6 @@ import 'package:housing_society_app/main.dart';
 import 'package:housing_society_app/utils/constants.dart';
 
 class PaymentsMethod {
-  static final CollectionReference _usersCollection = fireStore.collection(kUsersCollection);
-
   static Stream<QuerySnapshot> getPaymentDetails({@required String userId}) =>
-      _usersCollection.doc(userId).collection(kPaymentsCollection).snapshots();
+      fireStore.collection(kPaymentsCollection).snapshots();
 }

@@ -8,16 +8,12 @@ import 'package:housing_society_app/models/visitor.dart';
 import 'package:housing_society_app/utils/constants.dart';
 
 class VisitorsMethod {
-  static final CollectionReference _usersCollection = fireStore.collection(kUsersCollection);
-
   static Stream<QuerySnapshot> getVisitorsDetails({@required String userId}) =>
-      _usersCollection.doc(userId).collection(kVisitorsCollection).snapshots();
+      fireStore.collection(kVisitorsCollection).snapshots();
 
   static Future<bool> addDataToVisitorsCollection({@required Users users, @required Visitor visitor}) async {
     try {
       return await fireStore
-          .collection(kUsersCollection)
-          .doc(users.uid)
           .collection(kVisitorsCollection)
           .doc()
           .set(visitor.toMap())

@@ -109,7 +109,11 @@ class _ItemVisitor extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String _visitingDate = formatDateTime(visitor.visitingDate.toDate().toString(), newDateTimeFormat: kTimeDateFormat);
+    String _visitingDate = '';
+
+    if (!visitor.dailyVisitor) {
+      _visitingDate = formatDateTime(visitor.visitingDate.toDate().toString(), newDateTimeFormat: kTimeDateFormat);
+    }
 
     return MaterialCard(
       padding: const EdgeInsets.all(0),
@@ -131,7 +135,14 @@ class _ItemVisitor extends StatelessWidget {
                 right: 0,
                 child: Container(
                   padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
-                  decoration: BoxDecoration(color: kPrimaryColor, borderRadius: BorderRadius.circular(30)),
+                  decoration: BoxDecoration(
+                    color: kPrimaryColor,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(30),
+                      topRight: Radius.circular(30),
+                      bottomLeft: Radius.circular(30),
+                    ),
+                  ),
                   child: Text(
                     visitor.visitorType,
                     style: Theme.of(context).textTheme.bodyText2.copyWith(color: Colors.white),
@@ -144,8 +155,8 @@ class _ItemVisitor extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
                     color: visitor.approved ? kPrimaryColor : Colors.red,
+                    borderRadius: BorderRadius.only(topLeft: Radius.circular(30), bottomLeft: Radius.circular(30)),
                   ),
                   child: Text(
                     visitor.approved ? kApproved : kUnApproved,
@@ -170,16 +181,21 @@ class _ItemVisitor extends StatelessWidget {
                         children: [
                           Text(visitor.visitorName, style: Theme.of(context).textTheme.headline6),
                           const SizedBox(height: 5),
-                          Text(
-                            _visitingDate,
-                            style: Theme.of(context).textTheme.bodyText1.copyWith(fontWeight: FontWeight.normal),
-                          ),
-                          const SizedBox(height: 5),
+                          if (!visitor.dailyVisitor) ...[
+                            RichTextWidget(
+                              isDescNewLine: true,
+                              caption: kVisitingDate,
+                              description: _visitingDate,
+                              captionStyle: Theme.of(context).textTheme.bodyText2,
+                              descriptionStyle: Theme.of(context).textTheme.bodyText1,
+                            ),
+                            const SizedBox(height: 5),
+                          ],
                           RichTextWidget(
                             caption: kDailyVisitor,
                             description: visitor.dailyVisitor ? kYes : kNo,
+                            captionStyle: Theme.of(context).textTheme.bodyText2,
                             descriptionStyle: Theme.of(context).textTheme.bodyText1,
-                            captionStyle: Theme.of(context).textTheme.bodyText1.copyWith(fontWeight: FontWeight.normal),
                           ),
                         ],
                       ),
